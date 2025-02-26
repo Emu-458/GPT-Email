@@ -61,7 +61,7 @@
 
     <div class="section">
         <label id="recipientLabel">收件人：</label>
-        <p id="fixedRecipients">政務司司長、財政司司長、醫務衞生局局長</p>
+        <p id="fixedRecipients">致政務司司長、財政司司長、醫務衞生局局長</p>
     </div>
 
     <div class="section">
@@ -146,11 +146,11 @@
                 return;
             }
 
-            let recipientText = (currentLanguage === "en") ?
-                "Chief Secretary for Administration, Financial Secretary, Secretary of Health" :
-                "政務司司長、財政司司長、醫務衞生局局長";
+            let recipientSalutation = (currentLanguage === "en") ?
+                "To the Chief Secretary for Administration, Financial Secretary, and Secretary of Health" :
+                "致政務司司長、財政司司長、醫務衞生局局長";
 
-            let emailBody = `收件人：${recipientText}\n\n`;
+            let emailBody = `${recipientSalutation}\n\n`;
             emailBody += emailData.openingParagraphs.join("\n\n") + "\n\n";
 
             let selectedIssues = [];
@@ -160,6 +160,9 @@
                 let randomVersion = versions[Math.floor(Math.random() * versions.length)];
                 selectedIssues.push(randomVersion);
             });
+
+            // Randomize the order of the selected issues
+            selectedIssues.sort(() => Math.random() - 0.5);
 
             emailBody += selectedIssues.join(" ") + "\n\n"; // Combine all issues into one paragraph
 
@@ -176,23 +179,6 @@
             }).catch(err => {
                 console.error("複製失敗:", err);
             });
-        }
-
-        function updateRecipients(language) {
-            const recipientText = (language === "en") ?
-                "Chief Secretary for Administration, Financial Secretary, Secretary of Health" :
-                "政務司司長、財政司司長、醫務衞生局局長";
-            document.getElementById("fixedRecipients").innerText = recipientText;
-        }
-
-        function updateTitleOptions(language) {
-            const titleOptions = {
-                "zh": ["先生", "女士", "太太"],
-                "yue": ["先生", "小姐", "太太"],
-                "en": ["Mr.", "Ms.", "Mrs."]
-            };
-            let select = document.getElementById("userTitle");
-            select.innerHTML = titleOptions[language].map(title => `<option value="${title}">${title}</option>`).join("");
         }
 
         document.getElementById("languageSelect").addEventListener("change", function() {
