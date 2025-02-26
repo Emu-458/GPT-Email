@@ -48,10 +48,18 @@
 </head>
 <body>
 
-    <h1>電子郵件生成器</h1>
+    <h1 id="title">電子郵件生成器</h1>
 
     <div class="section">
-        <label>選擇收件人：</label>
+        <label id="langLabel">選擇語言：</label>
+        <select id="languageSelect">
+            <option value="zh">繁體中文 🇭🇰</option>
+            <option value="en">English 🇬🇧</option>
+        </select>
+    </div>
+
+    <div class="section">
+        <label id="recipientLabel">選擇收件人：</label>
         <select id="recipientSelect">
             <option value="A">A - 立法會議員</option>
             <option value="B">B - 政府部門</option>
@@ -62,37 +70,39 @@
     </div>
 
     <div class="section">
-        <label>輸入您的姓氏：</label>
+        <label id="surnameLabel">輸入您的姓氏：</label>
         <input type="text" id="userSurname" placeholder="例如：陳">
     </div>
 
     <div class="section">
-        <label>輸入您的電子郵件地址：</label>
+        <label id="emailLabel">輸入您的電子郵件地址：</label>
         <input type="email" id="userEmail" placeholder="例如：example@email.com">
     </div>
 
     <div class="section">
-        <p>請選擇您要包含的議題：</p>
+        <p id="issueLabel">請選擇您要包含的議題：</p>
         <div id="issuesContainer"></div>
     </div>
 
-    <button onclick="generateEmail()">生成郵件</button>
-    <button onclick="copyToClipboard()">複製郵件內容</button>
+    <button onclick="generateEmail()" id="generateButton">生成郵件</button>
+    <button onclick="copyToClipboard()" id="copyButton">複製郵件內容</button>
 
-    <h2>生成的郵件內容：</h2>
+    <h2 id="generatedEmailTitle">生成的郵件內容：</h2>
     <pre id="generatedEmail">（郵件內容將顯示在此處）</pre>
 
     <script>
         let emailData = {};
+        let currentLanguage = "zh";
 
-        async function loadEmailData() {
+        async function loadEmailData(language) {
             try {
-                const response = await fetch("email_content.json");
+                const response = await fetch(`email_content_${language}.json`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 emailData = await response.json();
                 populateIssues(emailData.issues);
+                translateUI(language);
             } catch (error) {
                 console.error("Error loading email content:", error);
                 alert("無法加載數據，請檢查 JSON 文件是否正確上傳。");
@@ -146,7 +156,7 @@
                 selectedIssues.push(`📌 **${issue}**\n\n- ${randomVersion}\n`);
             });
 
-            selectedIssues = selectedIssues.sort(() => Math.random() - 0.5); // 隨機排序
+            selectedIssues = selectedIssues.sort(() => Math.random() - 0.5);
             emailBody += selectedIssues.join("\n");
 
             emailBody += emailData.endingParagraphs.join("\n\n") + "\n\n";
@@ -164,15 +174,30 @@
             });
         }
 
-        document.getElementById("recipientSelect").addEventListener("change", function() {
-            if (this.value === "custom") {
-                document.getElementById("customRecipient").style.display = "block";
-            } else {
-                document.getElementById("customRecipient").style.display = "none";
-            }
+        function translateUI(language) {
+            const translations = {
+                zh: {
+                    title: "電子郵件生成器",
+                    generateButton: "生成郵件",
+                    copyButton: "複製郵件內容",
+                },
+                en: {
+                    title: "Email Generator",
+                    generateButton: "Generate Email",
+                    copyButton: "Copy Email Content",
+                }
+            };
+            document.getElementById("title").innerText = translations[language].title;
+            document.getElementById("generateButton").innerText = translations[language].generateButton;
+            document.getElementById("copyButton").innerText = translations[language].copyButton;
+        }
+
+        document.getElementById("languageSelect").addEventListener("change", function() {
+            currentLanguage = this.value;
+            loadEmailData(currentLanguage);
         });
 
-        document.addEventListener("DOMContentLoaded", loadEmailData);
+        document.addEventListener("DOMContentLoaded", () => loadEmailData(currentLanguage));
     </script>
 
 </body>
