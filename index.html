@@ -150,6 +150,8 @@
                 "To the Chief Secretary for Administration, Financial Secretary, Secretary of Health, and relevant departments of the Hong Kong SAR Government" :
                 "致政務司司長、財政司司長、醫務衞生局局長、香港特區政府相關部門";
 
+            let formattedName = (currentLanguage === "en") ? `${title} ${surname}` : `${surname}${title}`;
+
             let emailBody = `${recipientSalutation}\n\n`;
             emailBody += emailData.openingParagraphs.join("\n\n") + "\n\n";
 
@@ -161,13 +163,14 @@
                 selectedIssues.push(randomVersion);
             });
 
-            // Randomize the order of the selected issues
             selectedIssues.sort(() => Math.random() - 0.5);
+            emailBody += selectedIssues.join(" ") + "\n\n";
 
-            emailBody += selectedIssues.join(" ") + "\n\n"; // Combine all issues into one paragraph
+            // Randomly select an ending paragraph
+            let randomEnding = emailData.endingParagraphs[Math.floor(Math.random() * emailData.endingParagraphs.length)];
+            emailBody += randomEnding + "\n\n";
 
-            emailBody += emailData.endingParagraphs.join("\n\n") + "\n\n";
-            emailBody += `此郵件由 ${surname}${title} (${userEmail}) 授權發送。\n`;
+            emailBody += `此郵件由 ${formattedName} (${userEmail}) 授權發送。\n`;
 
             document.getElementById("generatedEmail").innerText = emailBody;
         }
