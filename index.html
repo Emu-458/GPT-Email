@@ -61,7 +61,7 @@
 
     <div class="section">
         <label id="recipientLabel">收件人：</label>
-        <p id="fixedRecipients">致政務司司長、財政司司長、醫務衞生局局長</p>
+        <p id="fixedRecipients">致政務司司長、財政司司長、醫務衞生局局長、香港特區政府相關部門</p>
     </div>
 
     <div class="section">
@@ -147,8 +147,8 @@
             }
 
             let recipientSalutation = (currentLanguage === "en") ?
-                "To the Chief Secretary for Administration, Financial Secretary, and Secretary of Health" :
-                "致政務司司長、財政司司長、醫務衞生局局長";
+                "To the Chief Secretary for Administration, Financial Secretary, Secretary of Health, and relevant departments of the Hong Kong SAR Government" :
+                "致政務司司長、財政司司長、醫務衞生局局長、香港特區政府相關部門";
 
             let emailBody = `${recipientSalutation}\n\n`;
             emailBody += emailData.openingParagraphs.join("\n\n") + "\n\n";
@@ -170,15 +170,6 @@
             emailBody += `此郵件由 ${surname}${title} (${userEmail}) 授權發送。\n`;
 
             document.getElementById("generatedEmail").innerText = emailBody;
-        }
-
-        function copyToClipboard() {
-            const emailContent = document.getElementById("generatedEmail").innerText;
-            navigator.clipboard.writeText(emailContent).then(() => {
-                alert("郵件內容已複製！");
-            }).catch(err => {
-                console.error("複製失敗:", err);
-            });
         }
 
         document.getElementById("languageSelect").addEventListener("change", function() {
