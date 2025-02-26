@@ -54,19 +54,14 @@
         <label id="langLabel">選擇語言：</label>
         <select id="languageSelect">
             <option value="zh">繁體中文 🇭🇰</option>
+            <option value="yue">粵語 (廣東話) 🗣️</option>
             <option value="en">English 🇬🇧</option>
         </select>
     </div>
 
     <div class="section">
-        <label id="recipientLabel">選擇收件人：</label>
-        <select id="recipientSelect">
-            <option value="A">A - 立法會議員</option>
-            <option value="B">B - 政府部門</option>
-            <option value="C">C - 公共政策專家</option>
-            <option value="custom">自定義</option>
-        </select>
-        <input type="text" id="customRecipient" placeholder="輸入自定義收件人" style="display:none;">
+        <label id="recipientLabel">收件人：</label>
+        <p id="fixedRecipients">政務司司長、財政司司長、醫務衞生局局長</p>
     </div>
 
     <div class="section">
@@ -103,6 +98,7 @@
                 emailData = await response.json();
                 populateIssues(emailData.issues);
                 translateUI(language);
+                updateRecipients(language);
             } catch (error) {
                 console.error("Error loading email content:", error);
                 alert("無法加載數據，請檢查 JSON 文件是否正確上傳。");
@@ -132,11 +128,6 @@
                 return;
             }
 
-            let recipient = document.getElementById("recipientSelect").value;
-            if (recipient === "custom") {
-                recipient = document.getElementById("customRecipient").value.trim();
-            }
-
             let surname = document.getElementById("userSurname").value.trim();
             let userEmail = document.getElementById("userEmail").value.trim();
 
@@ -145,7 +136,11 @@
                 return;
             }
 
-            let emailBody = `收件人：${recipient}\n\n`;
+            let recipientText = (currentLanguage === "en") ?
+                "Chief Secretary for Administration, Financial Secretary, Secretary of Health" :
+                "政務司司長、財政司司長、醫務衞生局局長";
+
+            let emailBody = `收件人：${recipientText}\n\n`;
             emailBody += emailData.openingParagraphs.join("\n\n") + "\n\n";
 
             let selectedIssues = [];
@@ -174,22 +169,11 @@
             });
         }
 
-        function translateUI(language) {
-            const translations = {
-                zh: {
-                    title: "電子郵件生成器",
-                    generateButton: "生成郵件",
-                    copyButton: "複製郵件內容",
-                },
-                en: {
-                    title: "Email Generator",
-                    generateButton: "Generate Email",
-                    copyButton: "Copy Email Content",
-                }
-            };
-            document.getElementById("title").innerText = translations[language].title;
-            document.getElementById("generateButton").innerText = translations[language].generateButton;
-            document.getElementById("copyButton").innerText = translations[language].copyButton;
+        function updateRecipients(language) {
+            const recipientText = (language === "en") ?
+                "Chief Secretary for Administration, Financial Secretary, Secretary of Health" :
+                "政務司司長、財政司司長、醫務衞生局局長";
+            document.getElementById("fixedRecipients").innerText = recipientText;
         }
 
         document.getElementById("languageSelect").addEventListener("change", function() {
