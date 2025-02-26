@@ -1,0 +1,68 @@
+{
+  "openingParagraphs": [
+    "Dear Legislative Council Members,",
+    "To the relevant departments of the Hong Kong SAR Government:"
+  ],
+  "endingParagraphs": [
+    "We hope you will seriously consider the voices of the citizens.",
+    "We urge the government to carefully review its policies."
+  ],
+  "issues": {
+    "Serious Illicit Cigarette Problem": [
+      "The expansion of the illicit cigarette market has become a serious public policy issue. Overly restricting legal tobacco products will only push consumers toward unregulated black-market products, resulting in tax revenue losses.",
+      "Current policies have led many smokers to purchase illicit cigarettes, which are unregulated and may contain harmful substances, posing greater health risks.",
+      "The government should strengthen border controls, enhance enforcement against cigarette smuggling, and impose harsher penalties on illegal tobacco trade.",
+      "Data shows that the illicit cigarette market is continuously expanding—does this indicate a failure of government strategy? Should excessively strict policies be reconsidered?",
+      "The goal of tobacco control is to protect public health, but excessive restrictions are driving smokers towards illicit markets, exposing them to even higher risks."
+    ],
+    "Excessively High Tobacco Tax": [
+      "Further increasing tobacco taxes will impose greater economic pressure on low-income groups and may drive more people to the illegal tobacco market.",
+      "Tobacco taxes are already exorbitantly high, prompting many smokers to opt for cheaper illicit tobacco products, which impacts government tax revenues.",
+      "The government should focus on providing better smoking cessation support, such as reducing the cost of cessation products and offering free cessation counseling, rather than simply raising tobacco taxes.",
+      "The government repeatedly increases tobacco taxes—is this truly for public health, or simply to generate more tax revenue?",
+      "Many smokers are not unwilling to quit but lack proper support. Excessively high tobacco taxes only add financial stress and may even encourage black-market transactions."
+    ],
+    "Ban on Flavored Tobacco Products": [
+      "Banning flavored tobacco products may lead consumers to turn to illicit cigarette markets rather than effectively reducing smoking rates.",
+      "Research shows that the primary reason people start smoking is nicotine dependence, not the flavor of tobacco.",
+      "The government should focus on education and smoking cessation support rather than simply banning flavored tobacco, to avoid unintentionally encouraging black-market trade.",
+      "When the legal market fails to meet consumer demand, the illegal market naturally rises, leading to more severe public health risks.",
+      "In a mature society, adults should have the right to choose rather than being unilaterally deprived of legal product options by the government."
+    ],
+    "Ban on E-cigarettes and Heated Tobacco Products": [
+      "Many countries have recognized e-cigarettes and heated tobacco products as harm reduction tools and have implemented regulations to ensure their safety.",
+      "If the government completely bans e-cigarettes and heated tobacco, many smokers may revert to traditional cigarettes, leading to more severe health issues.",
+      "A black market for e-cigarette products may emerge, and these unregulated products could contain even more dangerous substances.",
+      "The government should establish strict regulatory measures rather than outright banning e-cigarettes and heated tobacco products to safeguard public health.",
+      "Many smokers have successfully reduced their use of traditional cigarettes or even quit smoking through e-cigarettes; the government should provide appropriate choices."
+    ],
+    "Ban on Hookah (Waterpipe)": [
+      "Hookah has a certain market in bars and the catering industry. A total ban would economically impact related industries, affecting employment and consumption.",
+      "A strict ban on hookah may lead to the expansion of illegal markets, allowing unregulated products to enter circulation, thereby increasing health risks.",
+      "Instead of outright banning hookah, the government could implement a licensing system to allow designated venues to legally offer hookah services.",
+      "Hookah has become a cultural trend in Hong Kong and neighboring cities—has the government considered this phenomenon?",
+      "Many people view hookah as a social activity. A direct ban may not effectively reduce its use but could drive people to unregulated venues."
+    ],
+    "Expansion of No-smoking Areas Without Providing Legal Smoking Zones": [
+      "The purpose of expanding no-smoking areas is to improve public spaces, but without designated smoking areas, smokers will have nowhere to go.",
+      "If the government does not provide legal smoking areas, smokers will be forced to smoke in unsuitable places, such as back alleys and stairwells, affecting social order.",
+      "The government could establish designated smoking areas in specific locations, such as designated zones within parks, to ensure smokers have appropriate spaces.",
+      "If the government enforces smoking bans without providing legal smoking areas, does this mean the policy has not fully considered the rights of smokers?",
+      "The original intention of smoking bans is to improve public environments, but without legal smoking areas, unintended negative consequences may arise."
+    ],
+    "Failure to Differentiate Between ‘Space Oil’ Drugs and E-cigarette Products": [
+      "Recent news reports have shown that multiple teenagers were arrested for using ‘Space Oil,’ highlighting a lack of public awareness regarding such drugs.",
+      "Current government policies treat e-cigarettes and ‘Space Oil’ as the same issue, failing to effectively educate the public on how to differentiate between the two.",
+      "When legal nicotine e-cigarettes are banned, consumers cannot purchase safe products through regulated markets, leading to rampant black-market transactions.",
+      "The government should focus on education and regulation, ensuring consumers can distinguish between legitimate nicotine products and ‘Space Oil.’",
+      "Many e-cigarette users have no connection to ‘Space Oil’ at all, yet current policies stigmatize these regular consumers unnecessarily."
+    ],
+    "Lack of Long-term Public Education Plans": [
+      "Legal restrictions alone cannot sustainably reduce smoking rates, as smoking habits involve physiological dependence, psychological factors, and social influences.",
+      "The government should allocate resources to comprehensive health education programs rather than relying solely on strict regulations to restrict smoking.",
+      "The government should collaborate with medical experts, academic institutions, and non-governmental organizations to launch large-scale public awareness campaigns.",
+      "Without a long-term public education plan, smokers will struggle to access accurate information, reducing their chances of successfully quitting smoking.",
+      "Smokers are not necessarily unwilling to quit but often lack accurate information and appropriate support. The government should provide more smoking cessation assistance rather than merely increasing tobacco taxes."
+    ]
+  }
+}
