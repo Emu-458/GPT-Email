@@ -107,7 +107,6 @@
                 emailData = await response.json();
                 populateIssues(emailData.issues);
                 updateRecipients(language);
-                updateTitleOptions(language);
             } catch (error) {
                 console.error("Error loading email content:", error);
                 alert("無法加載數據，請檢查 JSON 文件是否正確上傳。");
@@ -166,11 +165,12 @@
             selectedIssues.sort(() => Math.random() - 0.5);
             emailBody += selectedIssues.join(" ") + "\n\n";
 
-            // Randomly select an ending paragraph
             let randomEnding = emailData.endingParagraphs[Math.floor(Math.random() * emailData.endingParagraphs.length)];
             emailBody += randomEnding + "\n\n";
 
-            emailBody += `此郵件由 ${formattedName} (${userEmail}) 授權發送。\n`;
+            emailBody += (currentLanguage === "en") ?
+                `This email is authorized by ${formattedName} (${userEmail}).` :
+                `此郵件由 ${formattedName} (${userEmail}) 授權發送。`;
 
             document.getElementById("generatedEmail").innerText = emailBody;
         }
