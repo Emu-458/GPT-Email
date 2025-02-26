@@ -68,7 +68,7 @@
         <label id="titleLabel">選擇您的稱謂：</label>
         <select id="userTitle">
             <option value="Mr.">先生</option>
-            <option value="Ms.">女士</option>
+            <option value="Ms.">小姐</option>
             <option value="Mrs.">太太</option>
         </select>
     </div>
@@ -148,7 +148,17 @@
                 "To the Chief Secretary for Administration, Financial Secretary, Secretary of Health, and relevant departments of the Hong Kong SAR Government" :
                 "致政務司司長、財政司司長、醫務衞生局局長、香港特區政府相關部門";
 
-            let formattedName = (currentLanguage === "en") ? `${title} ${surname}` : `${surname}${title}`;
+            let formattedName;
+            if (currentLanguage === "en") {
+                formattedName = `${title} ${surname}`;
+            } else {
+                const chineseTitles = {
+                    "Mr.": "先生",
+                    "Ms.": "小姐",
+                    "Mrs.": "太太"
+                };
+                formattedName = `${surname}${chineseTitles[title]}`;
+            }
 
             let emailBody = `${recipientSalutation}\n\n`;
             emailBody += emailData.openingParagraphs.join("\n\n") + "\n\n";
