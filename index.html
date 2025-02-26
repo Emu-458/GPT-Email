@@ -130,3 +130,17 @@
 
 </body>
 </html>
+async function loadEmailData() {
+    try {
+        const response = await fetch('email_content.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        emailData = await response.json();
+        console.log("成功加載 JSON 數據:", emailData); // Debugging
+        populateIssues(emailData.issues);
+    } catch (error) {
+        console.error("Error loading email content:", error);
+        alert("無法加載議題數據，請檢查 JSON 文件是否正確上傳。");
+    }
+}
