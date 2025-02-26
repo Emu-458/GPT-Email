@@ -65,6 +65,15 @@
     </div>
 
     <div class="section">
+        <label id="titleLabel">選擇您的稱謂：</label>
+        <select id="userTitle">
+            <option value="Mr.">先生</option>
+            <option value="Ms.">女士</option>
+            <option value="Mrs.">太太</option>
+        </select>
+    </div>
+
+    <div class="section">
         <label id="surnameLabel">輸入您的姓氏：</label>
         <input type="text" id="userSurname" placeholder="例如：陳">
     </div>
@@ -97,8 +106,8 @@
                 }
                 emailData = await response.json();
                 populateIssues(emailData.issues);
-                translateUI(language);
                 updateRecipients(language);
+                updateTitleOptions(language);
             } catch (error) {
                 console.error("Error loading email content:", error);
                 alert("無法加載數據，請檢查 JSON 文件是否正確上傳。");
@@ -128,6 +137,7 @@
                 return;
             }
 
+            let title = document.getElementById("userTitle").value;
             let surname = document.getElementById("userSurname").value.trim();
             let userEmail = document.getElementById("userEmail").value.trim();
 
@@ -148,14 +158,14 @@
                 let issue = checkbox.value;
                 let versions = emailData.issues[issue];
                 let randomVersion = versions[Math.floor(Math.random() * versions.length)];
-                selectedIssues.push(`📌 **${issue}**\n\n- ${randomVersion}\n`);
+                selectedIssues.push(`${randomVersion}\n`);
             });
 
             selectedIssues = selectedIssues.sort(() => Math.random() - 0.5);
             emailBody += selectedIssues.join("\n");
 
             emailBody += emailData.endingParagraphs.join("\n\n") + "\n\n";
-            emailBody += `此郵件由 ${surname} (${userEmail}) 授權發送。\n`;
+            emailBody += `此郵件由 ${surname}${title} (${userEmail}) 授權發送。\n`;
 
             document.getElementById("generatedEmail").innerText = emailBody;
         }
@@ -174,6 +184,16 @@
                 "Chief Secretary for Administration, Financial Secretary, Secretary of Health" :
                 "政務司司長、財政司司長、醫務衞生局局長";
             document.getElementById("fixedRecipients").innerText = recipientText;
+        }
+
+        function updateTitleOptions(language) {
+            const titleOptions = {
+                "zh": ["先生", "女士", "太太"],
+                "yue": ["先生", "小姐", "太太"],
+                "en": ["Mr.", "Ms.", "Mrs."]
+            };
+            let select = document.getElementById("userTitle");
+            select.innerHTML = titleOptions[language].map(title => `<option value="${title}">${title}</option>`).join("");
         }
 
         document.getElementById("languageSelect").addEventListener("change", function() {
