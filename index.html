@@ -158,11 +158,10 @@
                 let issue = checkbox.value;
                 let versions = emailData.issues[issue];
                 let randomVersion = versions[Math.floor(Math.random() * versions.length)];
-                selectedIssues.push(`${randomVersion}\n`);
+                selectedIssues.push(randomVersion);
             });
 
-            selectedIssues = selectedIssues.sort(() => Math.random() - 0.5);
-            emailBody += selectedIssues.join("\n");
+            emailBody += selectedIssues.join(" ") + "\n\n"; // Combine all issues into one paragraph
 
             emailBody += emailData.endingParagraphs.join("\n\n") + "\n\n";
             emailBody += `此郵件由 ${surname}${title} (${userEmail}) 授權發送。\n`;
