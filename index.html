@@ -106,7 +106,6 @@
                 }
                 emailData = await response.json();
                 populateIssues(emailData.issues);
-                updateRecipients(language);
             } catch (error) {
                 console.error("Error loading email content:", error);
                 alert("無法加載數據，請檢查 JSON 文件是否正確上傳。");
