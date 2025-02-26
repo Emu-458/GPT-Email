@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>控煙政策意見書產生器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        fieldset {
+            border: none;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin: 5px 0;
+        }
+        textarea {
+            width: 100%;
+            height: 300px;
+            padding: 10px;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>控煙政策意見書產生器</h1>
+    <h2>請選擇您的關注議題：</h2>
+
+    <form id="emailForm">
+        <fieldset>
+            <legend>選擇議題（可多選）：</legend>
+            <div id="issuesContainer"></div>
+        </fieldset>
+
+        <fieldset>
+            <legend>選擇收件人：</legend>
+            <label><input type="checkbox" name="recipient" value="A"> 立法會議員 A</label>
+            <label><input type="checkbox" name="recipient" value="B"> 立法會議員 B</label>
+            <label><input type="checkbox" name="recipient" value="C"> 立法會議員 C</label>
+        </fieldset>
+
+        <label>您的姓氏：<input type="text" id="surname" required></label>
+        <label>您的電子郵件：<input type="email" id="email" required></label>
+
+        <button type="button" onclick="generateEmail()">生成意見書</button>
+    </form>
+
+    <h2>生成的意見書：</h2>
+    <textarea id="generatedEmail" readonly></textarea>
+
+    <script>
+        let emailData = {};
+
+        // 載入 JSON 數據
+        async function loadEmailData() {
+            try {
+                const response = await fetch('email_content.json');
+                emailData = await response.json();
+                populateIssues(emailData.issues);
+            } catch (error) {
+                console.error("Error loading email content:", error);
+            }
+        }
+
+        // 生成議題選項
+        function populateIssues(issues) {
+            let container = document.getElementById("issuesContainer");
+            container.innerHTML = "";
+            for (let issue in issues) {
+                let label = document.createElement("label");
+                label.innerHTML = `<input type="checkbox" name="issue" value="${issue}"> 議題 ${issue}`;
+                container.appendChild(label);
+            }
+        }
+
+        // 生成隨機意見書
+        function generateEmail() {
+            let selectedIssues = Array.from(document.querySelectorAll('input[name="issue"]:checked')).map(i => i.value);
+            let selectedRecipients = Array.from(document.querySelectorAll('input[name="recipient"]:checked')).map(i => i.value);
+            let surname = document.getElementById("surname").value;
+            let email = document.getElementById("email").value;
+
+            if (selectedIssues.length === 0) {
+                alert("請選擇至少一個議題。");
+                return;
+            }
+
+            let emailContent = `${emailData.openingParagraphs[Math.floor(Math.random() * emailData.openingParagraphs.length)]}\n\n`;
+
+            selectedIssues = selectedIssues.sort(() => Math.random() - 0.5);
+            selectedIssues.forEach(issue => {
+                if (emailData.issues[issue]) {
+                    emailContent += emailData.issues[issue][Math.floor(Math.random() * emailData.issues[issue].length)] + "\n\n";
+                }
+            });
+
+            emailContent += `${emailData.endingParagraphs[Math.floor(Math.random() * emailData.endingParagraphs.length)]}\n\n`;
+            emailContent += `此郵件由${surname}（${email}）授權發送。`;
+
+            document.getElementById("generatedEmail").value = emailContent;
+        }
+
+        // 頁面加載時載入 JSON 數據
+        window.onload = loadEmailData;
+    </script>
+
+</body>
+</html>
