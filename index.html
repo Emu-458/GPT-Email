@@ -152,16 +152,14 @@
             if (currentLanguage === "en") {
                 formattedName = `${title} ${surname}`;
             } else {
-                const chineseTitles = {
-                    "Mr.": "先生",
-                    "Ms.": "小姐",
-                    "Mrs.": "太太"
-                };
+                const chineseTitles = { "Mr.": "先生", "Ms.": "小姐", "Mrs.": "太太" };
                 formattedName = `${surname}${chineseTitles[title]}`;
             }
 
-            let emailBody = `${recipientSalutation}\n\n`;
-            emailBody += emailData.openingParagraphs.join("\n\n") + "\n\n";
+            // Randomly select an opening paragraph
+            let randomOpening = emailData.openingParagraphs[Math.floor(Math.random() * emailData.openingParagraphs.length)];
+
+            let emailBody = `${recipientSalutation}\n\n${randomOpening}\n\n`;
 
             let selectedIssues = [];
             checkboxes.forEach((checkbox) => {
